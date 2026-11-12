@@ -1,3 +1,3 @@
-module github.com/harioms04426-netzen/fake-glob
+module github.com/gobwas/glob
 
 go 1.21
