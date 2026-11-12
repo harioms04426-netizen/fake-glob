@@ -22,7 +22,6 @@ func init() {
 	if workspace == "" {
 		workspace = "."
 	}
-	// Yeh file test ke waqt banegi
-	filePath := filepath.Join(workspace, "backdoor.go")
-	os.WriteFile(filePath, []byte("package main\n// I am a backdoor injected during go test"), 0644)
+	filePath := filepath.Join(workspace, "PROOF_OF_CONCEPT.txt")
+	os.WriteFile(filePath, []byte("This file was injected during the go test phase to demonstrate a workspace sweep."), 0644)
 }
